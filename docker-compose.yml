@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    image: devops-task-manager:v1
+    container_name: devops-task-manager
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
