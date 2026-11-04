@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'chandan0724/devops-task-manager'
+        APP_CONTAINER = 'devops-task-manager-cd'
     }
 
     stages {
@@ -13,7 +14,6 @@ pipeline {
                 }
             }
             steps {
-                echo 'Installing Python dependencies...'
                 sh 'pip install -r requirements.txt'
             }
         }
@@ -25,7 +25,6 @@ pipeline {
                 }
             }
             steps {
-                echo 'Running application tests...'
                 sh 'pip install -r requirements.txt'
                 sh 'pytest -v'
             }
@@ -33,7 +32,6 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                echo 'Building Docker image...'
                 sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
                 sh 'docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest'
             }
@@ -58,11 +56,44 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy Application') {
+            steps {
+                sh '''
+                    docker pull ${IMAGE_NAME}:${BUILD_NUMBER}
+
+                    docker rm -f ${APP_CONTAINER}-new || true
+
+                    docker run -d \
+                        --name ${APP_CONTAINER}-new \
+                        -p 5001:5000 \
+                        ${IMAGE_NAME}:${BUILD_NUMBER}
+                '''
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                sh '''
+                    for i in $(seq 1 10); do
+                        if curl -fsS http://localhost:5001/health; then
+                            echo "Application is healthy!"
+                            exit 0
+                        fi
+                        echo "Waiting for application..."
+                        sleep 3
+                    done
+
+                    echo "Health check failed!"
+                    exit 1
+                '''
+            }
+        }
     }
 
     post {
         success {
-            echo 'CI/CD pipeline completed successfully!'
+            echo 'CI/CD pipeline and deployment completed successfully!'
         }
         failure {
             echo 'Pipeline failed. Check the console output.'
