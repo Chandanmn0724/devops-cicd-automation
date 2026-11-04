@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -7,6 +8,7 @@ pipeline {
     }
 
     stages {
+
         stage('Install Dependencies') {
             agent {
                 docker {
@@ -76,10 +78,11 @@ pipeline {
             steps {
                 sh '''
                     for i in $(seq 1 10); do
-                        if curl -fsS http://localhost:5003/health; then
+                        if docker exec ${APP_CONTAINER}-new python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health', timeout=2)"; then
                             echo "Application is healthy!"
                             exit 0
                         fi
+
                         echo "Waiting for application..."
                         sleep 3
                     done
@@ -95,6 +98,7 @@ pipeline {
         success {
             echo 'CI/CD pipeline and deployment completed successfully!'
         }
+
         failure {
             echo 'Pipeline failed. Check the console output.'
         }
