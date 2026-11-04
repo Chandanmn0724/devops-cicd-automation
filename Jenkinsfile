@@ -66,7 +66,7 @@ pipeline {
 
                     docker run -d \
                         --name ${APP_CONTAINER}-new \
-                        -p 5001:5000 \
+                        -p 5003:5000 \
                         ${IMAGE_NAME}:${BUILD_NUMBER}
                 '''
             }
@@ -76,7 +76,7 @@ pipeline {
             steps {
                 sh '''
                     for i in $(seq 1 10); do
-                        if curl -fsS http://localhost:5001/health; then
+                        if curl -fsS http://localhost:5003/health; then
                             echo "Application is healthy!"
                             exit 0
                         fi
