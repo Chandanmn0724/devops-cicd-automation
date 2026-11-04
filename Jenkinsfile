@@ -3,14 +3,6 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                echo 'Checking out source code...'
-                checkout scm
-            }
-        }
-
         stage('Install Dependencies') {
             agent {
                 docker {
@@ -18,6 +10,7 @@ pipeline {
                 }
             }
             steps {
+                echo 'Installing Python dependencies...'
                 sh 'pip install -r requirements.txt'
             }
         }
@@ -29,6 +22,7 @@ pipeline {
                 }
             }
             steps {
+                echo 'Running application tests...'
                 sh 'pip install -r requirements.txt'
                 sh 'pytest -v'
             }
@@ -39,7 +33,6 @@ pipeline {
         success {
             echo 'CI Pipeline completed successfully!'
         }
-
         failure {
             echo 'CI Pipeline failed. Check the console output.'
         }
