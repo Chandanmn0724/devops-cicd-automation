@@ -291,7 +291,6 @@ B.E. – Artificial Intelligence and Data Science
 
 **Email:** [mnchandan605@gmail.com](mailto:mnchandan605@gmail.com)
 
----
 
 <p align="center">
   **Built with Python, Jenkins and Docker.**
@@ -305,3 +304,4 @@ B.E. – Artificial Intelligence and Data Science
   <br/>
   Learning by building practical DevOps projects.
 </p>
+---
