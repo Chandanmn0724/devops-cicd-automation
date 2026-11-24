@@ -273,24 +273,32 @@ Through this project, I gained practical experience in:
 - Introduce application monitoring and centralized logging.
 - Add pipeline notifications for build status.
 
+
 ## 13. Author
 
 **Chandan M N**
 
 B.E. – Artificial Intelligence and Data Science
 
-<p>
+<p align="left">
   <a href="https://github.com/ChandanMN0724">
-    <img src="https://img.shields.io/badge/GitHub-ChandanMN0724-181717?style=for-the-badge&logo=github" alt="GitHub"/>
+    <img src="https://img.shields.io/badge/GitHub-Visit%20Profile-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Profile"/>
   </a>
   <a href="https://www.linkedin.com/in/chandanmn07">
-    <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin" alt="LinkedIn"/>
+    <img src="https://img.shields.io/badge/LinkedIn-Connect%20with%20me-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Profile"/>
   </a>
 </p>
 
-Email: mnchandan605@gmail.com
+**Email:** [mnchandan605@gmail.com](mailto:mnchandan605@gmail.com)
 
 ---
+
+<p align="center">
+  **Built with Python, Jenkins and Docker.**
+  <br/>
+  *Learning by building practical DevOps projects.*
+</p>
+
 
 <p align="center">
   <strong>Built with Python, Jenkins and Docker.</strong>
